@@ -11,7 +11,20 @@ class ProductsController {
         const productDAO = ProductDAO()
         this.service = new ProductsServices(productDAO)
     }
+    
+    async getAllProducts(req, res) {
+        try {
+            const allProducts = await this.service.getProducts(req.query)
 
+            // HTTP 200 OK
+            return res.sendSuccess(allProducts.docs)
+        }
+        catch (err) {
+            //return res.status(500).json({ error: err })
+            return res.sendServerError(err)
+        }
+    }
+    
     async getProducts(req, res) {
         try {
             const filteredProducts = await this.service.getProducts(req.query)
@@ -27,7 +40,7 @@ class ProductsController {
                 prevLink: filteredProducts.hasPrevPage ? `/products?page=${filteredProducts.prevPage}` : null,
                 nextlink: filteredProducts.hasNextPage ? `/products?page=${filteredProducts.nextPage}` : null
             }
-
+            /*
             let status = 'success'
             if (filteredProducts.docs.length == 0)
                 status = 'error'
@@ -35,10 +48,11 @@ class ProductsController {
                 status,
                 ...result
             }
+            */
 
             // HTTP 200 OK
-            // return res.status(200).json(finalResult)
-            return res.sendSuccess(finalResult)
+            //return res.sendSuccess(finalResult)
+            return res.sendSuccess(result)
         }
         catch (err) {
             //return res.status(500).json({ error: err })

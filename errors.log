@@ -63,3 +63,9 @@ fatal: Server error: InvalidAction: Error trying to add a product to a cart
 fatal: Server error: InvalidAction: Error trying to add a product to a cart
 fatal: Server error: InvalidAction: Error trying to add a product to a cart
 fatal: Server error: InvalidAction: Error trying to add a product to a cart
+error: ERROR test example
+fatal: FATAL test example
+fatal: Server error: ProductNotFound: Error trying to get a product
+fatal: Server error: ProductNotFound: Error trying to get a product
+fatal: Server error: ProductNotFound: Error trying to get a product
+fatal: Server error: ProductNotFound: Error trying to get a product

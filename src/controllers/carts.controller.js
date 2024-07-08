@@ -76,7 +76,7 @@ class CartsController {
             let prodId = req.pid
             let quantity = +req.body.quantity
            
-            console.log(quantity)
+            //console.log(quantity)
             
             const result = await this.cartsService.addProductToCart(cartId, prodId, quantity)
             if (result)

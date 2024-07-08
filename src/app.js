@@ -24,6 +24,8 @@ const dbMessageManager = require('./dao/dbManagers/MessageManager')
 const { errorHandler } = require('./services/errors/errorHandler')
 
 const { useLogger } = require('./utils/logger')
+const swaggerJSDoc = require('swagger-jsdoc')
+const { serve, setup } = require('swagger-ui-express')
 
 //instanciar mi app
 const app = express()
@@ -50,6 +52,20 @@ app.use('/products/detail', express.static(`${__dirname}/../public`));
 app.use('/products/addCart', express.static(`${__dirname}/../public`));
 app.use('/products/create', express.static(`${__dirname}/../public`));
 app.use('/carts', express.static(`${__dirname}/../public`));
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: 'Documentación de Ecommerce API',
+            description: 'API for ecommerce app!'
+        },
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+}
+const specs = swaggerJSDoc(swaggerOptions)
+
+app.use('/apidocs', serve, setup(specs))
 
 //configuro mi session en MongoDB
 app.use(cookieParser())

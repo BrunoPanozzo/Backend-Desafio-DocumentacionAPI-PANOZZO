@@ -15,6 +15,8 @@ const withController = callback => {
 
 class ProductRouter extends BaseRouter {
     init() {
+        this.get('/all', [USER], withController((controller, req, res) => controller.getAllProducts(req, res)))
+
         this.get('/', [USER], withController((controller, req, res) => controller.getProducts(req, res)))
 
         this.post('/create', [ADMIN, USER_PREMIUM, SUPER_ADMIN], userIsLoggedIn, userIsAdminOrPremium, validateNewProduct, withController((controller, req, res) => controller.addProduct(req, res)))
